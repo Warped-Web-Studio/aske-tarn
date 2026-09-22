@@ -73,8 +73,8 @@
 
 .facts dd {
   font-family: var(--font-display);
-  font-weight: 640;
   font-variation-settings: "wdth" 62;
+  font-weight: 640;
   font-size: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
   line-height: 1;
   margin-top: 6px;
@@ -265,8 +265,8 @@
 
 .stepName {
   font-family: var(--font-display);
-  font-weight: 640;
   font-variation-settings: "wdth" 62;
+  font-weight: 640;
   font-size: clamp(2.75rem, 1.5rem + 4vw, 5.5rem);
   line-height: 0.9;
   text-transform: uppercase;

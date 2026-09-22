@@ -211,8 +211,8 @@
 .nameText {
   display: block;
   font-family: var(--font-display);
-  font-weight: 640;
   font-variation-settings: "wdth" 62;
+  font-weight: 640;
   font-size: 1.875rem;
   line-height: 0.95;
   text-transform: uppercase;

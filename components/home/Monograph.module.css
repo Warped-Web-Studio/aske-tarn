@@ -494,8 +494,8 @@
 
 .allTitle {
   font-family: var(--font-display);
-  font-weight: 640;
   font-variation-settings: "wdth" 62;
+  font-weight: 640;
   font-size: var(--fs-title);
   line-height: 0.9;
   text-transform: uppercase;

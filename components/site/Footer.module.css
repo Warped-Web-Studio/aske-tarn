@@ -28,8 +28,8 @@
   display: block;
   margin-top: 20px;
   font-family: var(--font-display);
-  font-weight: 640;
   font-variation-settings: "wdth" 62;
+  font-weight: 640;
   font-size: clamp(4rem, 2rem + 10vw, 11rem);
   line-height: 0.84;
   text-transform: uppercase;

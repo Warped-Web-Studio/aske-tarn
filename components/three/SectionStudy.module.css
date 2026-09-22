@@ -92,8 +92,8 @@
 .readout {
   grid-area: readout;
   font-family: var(--font-display);
-  font-weight: 640;
   font-variation-settings: "wdth" 62;
+  font-weight: 640;
   font-size: clamp(3.5rem, 2rem + 8vw, 7.5rem);
   line-height: 0.82;
   font-variant-numeric: tabular-nums;

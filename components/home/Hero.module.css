@@ -105,8 +105,8 @@
 .wordmark,
 .knockout {
   font-family: var(--font-display);
-  font-weight: 660;
   font-variation-settings: "wdth" 62;
+  font-weight: 660;
   font-size: var(--wordmark-size);
   line-height: 1;
   letter-spacing: -0.012em;
