@@ -25,6 +25,8 @@
   }
   .studyTitle {
     grid-column: 4 / span 5;
+    /* "Section" is ~3em wide; keep it inside five columns or the line mask clips it. */
+    font-size: min(var(--fs-display), 12vw);
   }
   .studyIntro {
     grid-column: 9 / -1;
