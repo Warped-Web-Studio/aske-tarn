@@ -1,0 +1,98 @@
+.drawing {
+  position: relative;
+  color: var(--color-carbon);
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.hatch {
+  stroke: var(--color-slate);
+  stroke-width: 0.12;
+}
+
+.cut.building {
+  fill: var(--color-carbon);
+}
+
+.cut.earth {
+  stroke: var(--color-slate);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+
+.beyond {
+  fill: none;
+  stroke: var(--color-carbon);
+  stroke-width: 0.75;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.55;
+}
+
+.ground {
+  stroke: var(--color-carbon);
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :global(.js) .drawing:not([data-revealed]) .beyond,
+  :global(.js) .drawing:not([data-revealed]) .ground {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  :global(.js) .drawing:not([data-revealed]) .cut {
+    opacity: 0;
+  }
+  .beyond,
+  .ground {
+    stroke-dasharray: 1;
+    transition: stroke-dashoffset 1800ms var(--ease-draft) calc(var(--p, 0) * 600ms);
+  }
+  .cut {
+    transition: opacity 900ms var(--ease-settle) calc(600ms + var(--p, 0) * 500ms);
+  }
+}
+
+.levels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.levels li {
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  translate: 0 -100%;
+  padding-bottom: 3px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  line-height: 1;
+  font-feature-settings: "zero" 1;
+  white-space: nowrap;
+}
+
+.levelValue {
+  padding: 2px 4px;
+  background: var(--color-plaster);
+}
+
+.levelName {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--color-slate);
+}
+
+@media (max-width: 767px) {
+  .levelName {
+    display: none;
+  }
+}

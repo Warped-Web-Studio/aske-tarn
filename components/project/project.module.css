@@ -1,0 +1,498 @@
+/* ── Title sheet ─────────────────────────────────────────────────────────── */
+
+.titleSheet {
+  padding-top: 24px;
+}
+
+@media (min-width: 1024px) {
+  .titleSheet {
+    padding-top: calc(16px + var(--titleblock-h) + 40px);
+  }
+}
+
+.titleTop {
+  row-gap: 16px;
+  padding-bottom: clamp(20px, 3vw, 40px);
+}
+
+.titleNumber {
+  grid-column: 1 / -1;
+  color: var(--color-slate);
+}
+
+.title {
+  grid-column: 1 / -1;
+  font-size: clamp(4rem, 1rem + 13vw, 16rem);
+  line-height: 0.82;
+}
+
+@media (min-width: 1024px) {
+  .titleNumber {
+    grid-column: 1 / span 3;
+    align-self: end;
+    padding-bottom: 0.6em;
+  }
+  .title {
+    grid-column: 4 / -1;
+  }
+}
+
+.heroFrame {
+  aspect-ratio: 4 / 5;
+}
+
+@media (min-width: 768px) {
+  .heroFrame {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroFrame {
+    aspect-ratio: auto;
+    height: min(86svh, 56.25vw);
+    min-height: 480px;
+  }
+}
+
+.heroDimension {
+  grid-column: 1 / -1;
+  padding-top: 16px;
+}
+
+.caption {
+  margin-top: 8px;
+  color: var(--color-slate);
+  text-transform: none;
+  text-wrap: pretty;
+}
+
+.heroDimension .caption {
+  text-align: center;
+}
+
+.intro {
+  row-gap: 48px;
+  padding-top: clamp(56px, 8vw, 120px);
+}
+
+.titleBlock {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--color-carbon);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  line-height: 1.45;
+  font-feature-settings: "zero" 1;
+  align-self: start;
+}
+
+.titleBlock > div {
+  padding: 10px 12px 12px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.titleBlock > div:nth-child(odd) {
+  border-right: 1px solid var(--hairline);
+}
+
+.titleBlock > div:nth-child(even) {
+  padding-left: 12px;
+}
+
+.titleBlock dt {
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--color-slate);
+}
+
+.introText {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 1024px) {
+  .titleBlock {
+    grid-column: 1 / span 4;
+    grid-row: 1;
+  }
+  .introText {
+    grid-column: 6 / span 7;
+    grid-row: 1;
+  }
+}
+
+/* ── Narrative ─────────────────────────────────────────────────────────── */
+
+.narrative {
+  row-gap: 24px;
+  padding-top: clamp(96px, 12vw, 200px);
+}
+
+.narrativeHead {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 12px;
+  align-self: start;
+}
+
+.narrativeTitle {
+  font-family: var(--font-serif);
+  font-size: var(--fs-title);
+  font-weight: 340;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.narrativeBody {
+  grid-column: 1 / -1;
+  max-width: 38em;
+}
+
+@media (min-width: 1024px) {
+  .narrativeHead {
+    grid-column: 1 / span 5;
+    position: sticky;
+    top: calc(var(--titleblock-h) + 48px);
+  }
+  .narrativeBody {
+    grid-column: 7 / span 5;
+    padding-top: 2.4em;
+  }
+}
+
+/* ── Photographic plates ───────────────────────────────────────────────── */
+
+.plate {
+  row-gap: 0;
+  margin-top: clamp(64px, 9vw, 160px);
+}
+
+.full .fullFrame {
+  grid-column: 1 / -1;
+  margin-inline: calc(var(--margin) * -1);
+  aspect-ratio: 4 / 5;
+}
+
+.full .caption {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 768px) {
+  .full .fullFrame {
+    aspect-ratio: 16 / 9;
+  }
+  .full .caption {
+    grid-column: 1 / span 5;
+  }
+}
+
+.pairFirst,
+.pairSecond {
+  grid-column: 1 / -1;
+}
+
+.pairFirstFrame {
+  aspect-ratio: 4 / 5;
+}
+
+.pairSecondFrame {
+  aspect-ratio: 3 / 4;
+}
+
+.pairSecond {
+  margin-top: 40px;
+  grid-column: 2 / -1;
+}
+
+@media (min-width: 768px) {
+  .pairFirst {
+    grid-column: 1 / span 5;
+  }
+  .pairSecond {
+    grid-column: 6 / -1;
+    align-self: end;
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pairFirst {
+    grid-column: 1 / span 7;
+  }
+  .pairFirstFrame {
+    aspect-ratio: 5 / 4;
+  }
+  .pairSecond {
+    grid-column: 9 / span 4;
+    align-self: start;
+    margin-top: 18%;
+  }
+}
+
+.offset .offsetFrame {
+  grid-column: 1 / -1;
+  aspect-ratio: 3 / 2;
+}
+
+.offset .offsetCaption {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 1024px) {
+  .offset .offsetFrame {
+    grid-column: 5 / -1;
+    grid-row: 1;
+    margin-right: calc(var(--margin) * -1);
+  }
+  .offset .offsetCaption {
+    grid-column: 1 / span 3;
+    grid-row: 1;
+    align-self: end;
+  }
+}
+
+/* ── Section study and drawings (flagship) ─────────────────────────────── */
+
+.study {
+  padding-top: clamp(96px, 12vw, 200px);
+}
+
+.studyLabel,
+.studyTitle {
+  grid-column: 1 / -1;
+}
+
+.studyTitle {
+  font-size: clamp(3rem, 1rem + 7vw, 8rem);
+}
+
+@media (min-width: 1024px) {
+  .studyLabel {
+    grid-column: 1 / span 3;
+    padding-top: 0.6em;
+  }
+  .studyTitle {
+    grid-column: 4 / -1;
+  }
+}
+
+
+.drawings {
+  row-gap: 32px;
+  padding-top: clamp(96px, 12vw, 200px);
+}
+
+.drawingsHead {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 12px;
+}
+
+.drawingBlock {
+  grid-column: 1 / -1;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-carbon);
+}
+
+.drawingBlock + .drawingBlock {
+  margin-top: 64px;
+}
+
+.drawingLabel {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+/* ── Materials ─────────────────────────────────────────────────────────── */
+
+.materials {
+  row-gap: 32px;
+  padding-top: clamp(96px, 12vw, 200px);
+}
+
+.materialsHead {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 12px;
+}
+
+.materialList {
+  grid-column: 1 / -1;
+}
+
+.material {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.5rem 88px 1fr;
+  grid-template-areas:
+    "code swatch name"
+    "code swatch spec";
+  column-gap: 16px;
+  row-gap: 6px;
+  align-items: start;
+  padding-block: 18px;
+}
+
+.materialRule {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: var(--hairline-strong);
+}
+
+.materialCode {
+  grid-area: code;
+  padding-top: 2px;
+}
+
+.swatch {
+  grid-area: swatch;
+  position: relative;
+  aspect-ratio: 1;
+  overflow: clip;
+  background: var(--color-limewash);
+  outline: 1px solid var(--hairline-strong);
+  outline-offset: -1px;
+}
+
+.swatch img {
+  object-fit: cover;
+}
+
+.materialName {
+  grid-area: name;
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 125;
+  font-weight: 560;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.materialSpec {
+  grid-area: spec;
+  max-width: 44ch;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--color-graphite);
+  text-wrap: pretty;
+}
+
+@media (min-width: 1024px) {
+  .materialsHead {
+    grid-column: 1 / span 4;
+    align-self: start;
+    position: sticky;
+    top: calc(var(--titleblock-h) + 48px);
+  }
+  .materialList {
+    grid-column: 6 / -1;
+  }
+  .material {
+    grid-template-columns: 4rem 132px minmax(0, 1fr) minmax(0, 1.4fr);
+    grid-template-areas: "code swatch name spec";
+    column-gap: var(--gutter);
+    padding-block: 20px;
+  }
+  .materialName {
+    padding-top: 2px;
+  }
+}
+
+/* Standard material hatches, as on a drawing. */
+.hatch {
+  position: absolute;
+  inset: 0;
+}
+
+.hatchConcrete {
+  background-color: var(--color-limewash);
+  background-image:
+    radial-gradient(circle at 30% 40%, var(--color-slate) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 70% 80%, var(--color-slate) 0 1.2px, transparent 1.7px),
+    linear-gradient(45deg, transparent 46%, var(--color-stone) 46% 50%, transparent 50%);
+  background-size: 14px 14px, 19px 19px, 22px 22px;
+}
+
+.hatchTimber {
+  background-image: repeating-radial-gradient(
+    ellipse 160% 60% at 20% 50%,
+    transparent 0 5px,
+    var(--color-stone) 5px 6px
+  );
+}
+
+.hatchStone {
+  background-image:
+    repeating-linear-gradient(45deg, var(--color-stone) 0 1px, transparent 1px 8px),
+    repeating-linear-gradient(-45deg, var(--color-stone) 0 1px, transparent 1px 8px);
+}
+
+.hatchMetal {
+  background-image: repeating-linear-gradient(45deg, var(--color-graphite) 0 1px, transparent 1px 4px);
+}
+
+.hatchGlass {
+  background-image:
+    linear-gradient(90deg, transparent 30%, var(--color-slate) 30% calc(30% + 1px), transparent calc(30% + 1px)),
+    linear-gradient(90deg, transparent 38%, var(--color-slate) 38% calc(38% + 1px), transparent calc(38% + 1px));
+}
+
+.hatchEarth {
+  background-image:
+    radial-gradient(circle, var(--color-slate) 0 0.8px, transparent 1.2px),
+    repeating-linear-gradient(0deg, transparent 0 9px, var(--color-stone) 9px 10px);
+  background-size: 7px 7px, auto;
+}
+
+/* ── Next sheet ────────────────────────────────────────────────────────── */
+
+.next {
+  padding-top: clamp(120px, 16vw, 260px);
+}
+
+.nextLink {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 16px;
+  position: relative;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-carbon);
+}
+
+.nextMeta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+
+.nextTitle {
+  font-size: var(--fs-display);
+  position: relative;
+  z-index: 1;
+  margin-bottom: calc(var(--fs-display) * -0.32);
+  transition: color var(--t-micro) linear;
+}
+
+.nextFrame {
+  margin-inline: calc(var(--margin) * -1);
+  aspect-ratio: 16 / 9;
+}
+
+@media (min-width: 1024px) {
+  .nextFrame {
+    aspect-ratio: 21 / 8;
+  }
+}
+
+@media (hover: hover) {
+  .nextLink:hover .nextTitle {
+    color: var(--color-graphite);
+  }
+}

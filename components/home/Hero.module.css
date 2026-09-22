@@ -1,0 +1,444 @@
+/*
+  Geometry. Every position is derived from the live grid so the photograph,
+  the wordmark and its knockout copy align exactly at every width.
+  cqw / cqh = the hero's own width and height (it is a size container).
+*/
+.hero {
+  container-type: size;
+  position: relative;
+  height: calc(100svh - var(--sheetbar-h));
+  min-height: 560px;
+  max-height: 1180px;
+
+  --c: calc((100cqw - 2 * var(--margin) - (var(--cols) - 1) * var(--gutter)) / var(--cols));
+  --datum: 63cqh;
+  --frame-top: 52px;
+  --frame-start: 1; /* zero-based column index */
+  --frame-span: 3;
+  --frame-x: calc(var(--margin) + var(--frame-start) * (var(--c) + var(--gutter)));
+  --frame-bleed: 0px;
+  --frame-w: calc(var(--frame-span) * var(--c) + (var(--frame-span) - 1) * var(--gutter) + var(--frame-bleed));
+
+  /* Width of the name, in ems, at the display width axis. */
+  --wordmark-em: 3.64;
+  --wordmark-size: min(23cqw, calc((63cqh - var(--frame-top) + 40px) / 4.3));
+}
+
+@media (min-width: 768px) {
+  .hero {
+    --datum: 70cqh;
+    --frame-top: 76px;
+    --frame-start: 3;
+    --frame-span: 5;
+    /* On tablets the photograph runs off the right edge, so the whole name is cut by it. */
+    --frame-bleed: var(--margin);
+    --wordmark-size: calc((100cqw - 2 * var(--margin)) / var(--wordmark-em));
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    height: 100svh;
+    --datum: 68cqh;
+    --frame-top: calc(16px + var(--titleblock-h) + 32px);
+    --frame-start: 5;
+    --frame-span: 6;
+    --frame-bleed: 0px;
+  }
+}
+
+/* Short landscape screens: lift the ground line so there's room beneath it. */
+@media (min-width: 768px) and (max-height: 720px) {
+  .hero {
+    --datum: 64cqh;
+  }
+}
+
+.axes {
+  --axes-top: 0;
+  --axes-bubble-top: 14px;
+}
+
+@media (min-width: 1024px) {
+  .axes {
+    --axes-bubble-top: calc(16px + var(--titleblock-h) + 4px);
+  }
+  /* Keep the bubbles clear of the title block. */
+  .axes :global([data-axis]:nth-child(n + 7)) > span {
+    display: none;
+  }
+}
+
+/* ── The photograph, standing on the ground line ────────────────────────── */
+
+.frameLink {
+  position: absolute;
+  left: var(--frame-x);
+  width: var(--frame-w);
+  top: var(--frame-top);
+  height: calc(var(--datum) - var(--frame-top));
+  display: block;
+  /* Above the wordmark: where they overlap, the knockout copy inside shows. */
+  z-index: 1;
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+}
+
+.frameTag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 8px 4px;
+  background: var(--color-plaster);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* ── The name, set on the ground line ───────────────────────────────────── */
+
+.wordmark,
+.knockout {
+  font-family: var(--font-display);
+  font-weight: 660;
+  font-variation-settings: "wdth" 62;
+  font-size: var(--wordmark-size);
+  line-height: 1;
+  letter-spacing: -0.012em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-box: trim-both cap alphabetic;
+}
+
+.wordmark {
+  position: absolute;
+  left: var(--margin);
+  top: var(--datum);
+  translate: 0 -100%;
+  color: var(--color-carbon);
+  pointer-events: none;
+}
+
+.wordmarkLine {
+  display: block;
+}
+
+.wordmarkLine > span {
+  display: block;
+}
+
+/* The same name, inside the photograph's frame, in plaster: where the
+   type crosses the building it reads as cut out of it. */
+.knockout {
+  position: absolute;
+  left: calc(var(--margin) - var(--frame-x));
+  bottom: 0;
+  color: var(--color-plaster);
+  pointer-events: none;
+  display: none;
+}
+
+/* Browsers without text-box trimming: drop the line box onto the baseline. */
+@supports not (text-box: trim-both cap alphabetic) {
+  .wordmark,
+  .knockout {
+    line-height: 0.74;
+    margin-bottom: -0.035em;
+  }
+}
+
+/* Phones: the name stands vertically in the first column, beside the cut. */
+@media (max-width: 767px) {
+  .wordmark {
+    writing-mode: vertical-rl;
+    rotate: 180deg;
+    translate: 0 0;
+    top: auto;
+    bottom: calc(100cqh - var(--datum));
+    left: calc(var(--margin) + var(--c) - 0.72 * var(--wordmark-size) - 2px);
+    height: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .knockout {
+    display: block;
+  }
+}
+
+/* ── Ground line and poché ─────────────────────────────────────────────── */
+
+.datum {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--datum);
+  height: 1px;
+}
+
+.datumLine {
+  position: absolute;
+  inset: 0;
+  background: var(--color-carbon);
+  transform-origin: left center;
+}
+
+.datumLabel {
+  position: absolute;
+  right: var(--margin);
+  top: 5px;
+  z-index: 1;
+  padding: 3px 6px;
+  background: var(--color-plaster);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 767px) {
+  .datumLabel {
+    display: none;
+  }
+}
+
+.poche {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--datum) + 1px);
+  height: 18px;
+  border-bottom: 1px solid var(--hairline-strong);
+}
+
+@media (min-width: 1024px) {
+  .poche {
+    height: 28px;
+  }
+}
+
+/* ── Beneath the ground line ────────────────────────────────────────────── */
+
+.below {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--datum) + 19px);
+  bottom: 0;
+  align-content: start;
+  row-gap: 16px;
+  padding-top: 18px;
+}
+
+.intro {
+  grid-column: 1 / -1;
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+.meta {
+  display: none;
+}
+
+.thesis {
+  display: none;
+}
+
+.descend {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  justify-self: start;
+  --marker-size: 44px;
+}
+
+.descendTitle {
+  display: block;
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 125;
+  font-weight: 560;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.descendHint {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--color-slate);
+}
+
+@media (min-width: 768px) {
+  .below {
+    padding-top: 24px;
+  }
+  .intro {
+    grid-column: 1 / span 5;
+    font-size: 1.1875rem;
+  }
+  .descend {
+    grid-column: 6 / -1;
+    justify-self: end;
+    align-self: start;
+  }
+}
+
+@media (min-width: 1024px) {
+  .below {
+    top: calc(var(--datum) + 29px);
+    padding-top: 28px;
+  }
+
+  /* On large screens the introduction moves above the ground line,
+     into the space left of the photograph. */
+  .intro {
+    position: absolute;
+    top: calc(var(--frame-top) - var(--datum) - 29px);
+    left: var(--margin);
+    width: calc(4 * var(--c) + 3 * var(--gutter));
+    font-size: clamp(1.1875rem, 0.8rem + 0.6vw, 1.5rem);
+    line-height: 1.32;
+    font-weight: 360;
+  }
+
+  .meta {
+    grid-column: 1 / span 5;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    gap: 0;
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-feature-settings: "zero" 1;
+  }
+
+  .meta > div {
+    padding-right: 20px;
+    margin-right: 20px;
+    border-right: 1px solid var(--hairline);
+  }
+
+  .meta > div:last-child {
+    border-right: 0;
+  }
+
+  .meta dt {
+    color: var(--color-slate);
+  }
+
+  .thesis {
+    display: block;
+    grid-column: 6 / span 5;
+    font-size: var(--fs-lede);
+    line-height: 1.12;
+    font-weight: 340;
+    font-style: italic;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  .descend {
+    grid-column: 10 / -1;
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 760px) {
+  .thesis {
+    font-size: 1.75rem;
+  }
+}
+
+/* ── Intro sequence (first visit per session) ───────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  :global(html[data-intro="play"]) .axes :global([data-axis])::before {
+    animation: axis-draw 1100ms var(--ease-draft) both;
+    animation-delay: calc(var(--i, 0) * 45ms);
+    transform-origin: top;
+  }
+  :global(html[data-intro="play"]) .axes :global([data-axis]) > span {
+    animation: annotate 700ms var(--ease-settle) both;
+    animation-delay: calc(500ms + var(--i, 0) * 45ms);
+  }
+  :global(html[data-intro="play"]) .datumLine {
+    animation: datum-draw 1200ms var(--ease-draft) 150ms both;
+  }
+  :global(html[data-intro="play"]) .frame {
+    animation: rise 1500ms var(--ease-draft) 250ms both;
+  }
+  :global(html[data-intro="play"]) .frame img {
+    animation: settle 2200ms var(--ease-settle) 250ms both;
+  }
+  :global(html[data-intro="play"]) .wordmarkLine > span,
+  :global(html[data-intro="play"]) .knockout {
+    animation: set 1100ms var(--ease-draft) 520ms both;
+  }
+  :global(html[data-intro="play"]) .wordmarkLine {
+    overflow: clip;
+  }
+  :global(html[data-intro="play"]) .poche,
+  :global(html[data-intro="play"]) .datumLabel,
+  :global(html[data-intro="play"]) .frameTag,
+  :global(html[data-intro="play"]) .below > * {
+    animation: annotate 800ms var(--ease-settle) both;
+    animation-delay: 1150ms;
+  }
+  :global(html[data-intro="play"]) .below > :nth-child(2) {
+    animation-delay: 1230ms;
+  }
+  :global(html[data-intro="play"]) .below > :nth-child(3) {
+    animation-delay: 1310ms;
+  }
+  :global(html[data-intro="play"]) .below > :nth-child(4) {
+    animation-delay: 1390ms;
+  }
+}
+
+@keyframes axis-draw {
+  from {
+    scale: 1 0;
+  }
+}
+@keyframes datum-draw {
+  from {
+    scale: 0 1;
+  }
+}
+/* The image is never fully hidden: it opens from its lower half, so the
+   largest paint happens immediately. */
+@keyframes rise {
+  from {
+    clip-path: inset(42% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes settle {
+  from {
+    scale: 1.1;
+  }
+}
+@keyframes set {
+  from {
+    translate: 0 102%;
+  }
+}
+@keyframes annotate {
+  from {
+    opacity: 0;
+    translate: 0 6px;
+  }
+}

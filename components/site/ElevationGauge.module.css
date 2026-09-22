@@ -1,0 +1,83 @@
+@property --depth {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+.gauge {
+  display: none;
+}
+
+/* Only where the browser can drive it from scroll, and only with room in the margin. */
+@supports (animation-timeline: scroll()) and (width: round(down, 1.5px, 1px)) {
+  @media (min-width: 1024px) {
+    .gauge {
+      /* The page reads as 36 m of section, from +0.00 down. */
+      --range: 36;
+      position: fixed;
+      z-index: 30;
+      left: calc(var(--margin) / 2 - 6px);
+      bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--color-slate);
+      font-feature-settings: "zero" 1;
+      pointer-events: none;
+      animation: descend linear both;
+      animation-timeline: scroll(root block);
+      mix-blend-mode: multiply;
+    }
+  }
+}
+
+@keyframes descend {
+  from {
+    --depth: 0;
+  }
+  to {
+    --depth: var(--range);
+  }
+}
+
+.caption,
+.value {
+  writing-mode: vertical-rl;
+  rotate: 180deg;
+  white-space: nowrap;
+}
+
+.caption {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.value {
+  --metres: round(down, var(--depth), 1);
+  --cm: round(down, mod(var(--depth) * 100, 100), 1);
+  counter-reset: metres var(--metres) cm var(--cm);
+  color: var(--color-carbon);
+}
+
+.value::before {
+  content: counter(metres) "." counter(cm, decimal-leading-zero) " m";
+}
+
+.track {
+  position: relative;
+  width: 1px;
+  height: 96px;
+  background: var(--hairline-strong);
+}
+
+.thumb {
+  position: absolute;
+  left: -4px;
+  top: calc(var(--depth) / var(--range) * 100%);
+  width: 9px;
+  height: 1px;
+  background: var(--color-vermilion);
+}

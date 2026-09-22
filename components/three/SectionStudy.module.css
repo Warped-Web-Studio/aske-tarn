@@ -1,0 +1,237 @@
+.study {
+  position: relative;
+}
+
+.header {
+  row-gap: 24px;
+  padding-bottom: clamp(24px, 4vw, 56px);
+}
+
+.track {
+  position: relative;
+  height: 240svh;
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: calc(100svh - var(--sheetbar-h));
+  padding-inline: var(--margin);
+  padding-bottom: 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    height: auto;
+  }
+  .stage {
+    position: relative;
+    height: min(88svh, 820px);
+  }
+}
+
+.viewport {
+  position: relative;
+  min-height: 0;
+  margin-inline: calc(var(--margin) * -1);
+}
+
+.poster,
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 900ms var(--ease-settle);
+}
+
+.poster {
+  display: grid;
+  align-items: center;
+  padding-inline: var(--margin);
+}
+
+.canvas {
+  opacity: 0;
+}
+
+.stage[data-status="ready"] .canvas {
+  opacity: 1;
+}
+
+.stage[data-status="ready"] .poster {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 600ms linear,
+    visibility 0s 600ms;
+}
+
+/* ── Panel: readout, levels, slider ─────────────────────────────────────── */
+
+.panel {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "label   label"
+    "readout level"
+    "slider  slider"
+    "caption caption";
+  align-items: end;
+  column-gap: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-carbon);
+}
+
+.panel > :first-child {
+  grid-area: label;
+}
+
+.readout {
+  grid-area: readout;
+  font-family: var(--font-display);
+  font-weight: 640;
+  font-variation-settings: "wdth" 62;
+  font-size: clamp(3.5rem, 2rem + 8vw, 7.5rem);
+  line-height: 0.82;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.levels {
+  grid-area: level;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-feature-settings: "zero" 1;
+  text-align: right;
+}
+
+.levels li {
+  display: none;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.levels li[data-state="current"] {
+  display: flex;
+}
+
+.levelValue {
+  color: var(--color-slate);
+}
+
+.sliderLabel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.slider {
+  grid-area: slider;
+  width: 100%;
+  margin-top: 16px;
+  accent-color: var(--color-vermilion);
+  cursor: ns-resize;
+}
+
+.caption {
+  grid-area: caption;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .track {
+    height: 280svh;
+  }
+}
+
+@media (min-width: 1024px) {
+  .track {
+    height: 320svh;
+  }
+
+  .stage {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: 1fr;
+    column-gap: var(--gutter);
+    height: 100svh;
+    padding-top: calc(var(--titleblock-h) + 40px);
+    padding-bottom: 40px;
+  }
+
+  .viewport {
+    grid-column: 4 / -1;
+    grid-row: 1;
+    margin-inline: 0 calc(var(--margin) * -1);
+  }
+
+  .panel {
+    grid-column: 1 / span 3;
+    grid-row: 1;
+    align-self: end;
+    grid-template-columns: 1fr 28px;
+    grid-template-areas:
+      "label   slider"
+      "readout slider"
+      "level   slider"
+      "caption slider";
+    align-items: start;
+    row-gap: 20px;
+    padding-top: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .levels {
+    text-align: left;
+  }
+
+  .levels li {
+    display: flex;
+    justify-content: flex-start;
+    padding-block: 7px;
+    border-top: 1px solid var(--hairline);
+    transition:
+      color var(--t-micro) linear,
+      opacity var(--t-micro) linear;
+  }
+
+  .levels li[data-state="removed"] {
+    opacity: 0.35;
+    text-decoration: line-through;
+    text-decoration-color: var(--color-stone);
+  }
+
+  .levels li[data-state="current"] {
+    color: var(--color-vermilion);
+  }
+
+  .levels li[data-state="current"] .levelValue {
+    color: inherit;
+  }
+
+  .slider {
+    align-self: stretch;
+    width: 28px;
+    height: auto;
+    min-height: 240px;
+    margin-top: 0;
+    writing-mode: vertical-lr;
+    direction: rtl;
+  }
+
+  .caption {
+    display: block;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+    color: var(--color-slate);
+    text-wrap: pretty;
+  }
+}

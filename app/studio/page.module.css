@@ -1,0 +1,461 @@
+.studio {
+  padding-top: 24px;
+}
+
+@media (min-width: 1024px) {
+  .studio {
+    padding-top: calc(16px + var(--titleblock-h) + 40px);
+  }
+}
+
+.head {
+  row-gap: 20px;
+  padding-bottom: clamp(40px, 6vw, 88px);
+}
+
+.headLabel,
+.title,
+.lede {
+  grid-column: 1 / -1;
+}
+
+.title {
+  font-size: clamp(6rem, 2rem + 20vw, 24rem);
+  line-height: 0.78;
+}
+
+@media (min-width: 1024px) {
+  .headLabel {
+    grid-column: 1 / span 3;
+  }
+  .title {
+    grid-column: 1 / span 8;
+    grid-row: 2;
+  }
+  .lede {
+    grid-column: 8 / -1;
+    grid-row: 3;
+    margin-top: 24px;
+  }
+}
+
+/* ── Opening ───────────────────────────────────────────────────────────── */
+
+.opening {
+  row-gap: 24px;
+}
+
+.openingFrame {
+  grid-column: 1 / -1;
+  margin-inline: calc(var(--margin) * -1);
+  aspect-ratio: 4 / 3;
+}
+
+.facts {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--color-carbon);
+}
+
+.facts > div {
+  padding: 12px 0 14px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.facts dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--color-slate);
+}
+
+.facts dd {
+  font-family: var(--font-display);
+  font-weight: 640;
+  font-variation-settings: "wdth" 62;
+  font-size: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+  line-height: 1;
+  margin-top: 6px;
+}
+
+@media (min-width: 1024px) {
+  .openingFrame {
+    grid-column: 1 / span 8;
+    margin-inline: calc(var(--margin) * -1) 0;
+    aspect-ratio: 16 / 11;
+  }
+  .facts {
+    grid-column: 10 / -1;
+    grid-template-columns: 1fr;
+    align-self: end;
+  }
+}
+
+/* ── Principles, as a section ──────────────────────────────────────────── */
+
+.principles {
+  row-gap: 40px;
+  padding-top: clamp(120px, 14vw, 240px);
+}
+
+.principlesHead {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 16px;
+  align-self: start;
+}
+
+.sectionTitle {
+  font-size: clamp(3.75rem, 1.5rem + 7vw, 8.5rem);
+}
+
+.principlesNote {
+  max-width: 34ch;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--color-graphite);
+}
+
+.levels {
+  grid-column: 1 / -1;
+}
+
+.level {
+  position: relative;
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  column-gap: var(--gutter);
+  row-gap: 8px;
+  padding: 22px 0 40px;
+}
+
+.levelRule {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: var(--hairline-strong);
+}
+
+.ground .levelRule {
+  height: 2px;
+  background: var(--color-carbon);
+}
+
+/* Below the ground line: the earth, hatched. */
+.below {
+  padding-left: 16px;
+  padding-right: 16px;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    color-mix(in oklab, var(--color-stone) 55%, transparent) 0 1px,
+    transparent 1px 9px
+  );
+}
+
+.below .levelText {
+  background: var(--color-plaster);
+  box-shadow: 0 0 0 8px var(--color-plaster);
+  justify-self: start;
+}
+
+.levelValue {
+  grid-row: 1 / span 2;
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  font-feature-settings: "zero" 1;
+}
+
+.ground .levelValue {
+  color: var(--color-vermilion);
+}
+
+.levelTitle {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 125;
+  font-weight: 560;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.levelText {
+  max-width: 30em;
+  font-size: var(--fs-lede);
+  font-weight: 340;
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+  text-wrap: pretty;
+}
+
+@media (max-width: 767px) {
+  .level {
+    grid-template-columns: 1fr;
+  }
+  .levelValue {
+    grid-row: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .principlesHead {
+    grid-column: 1 / span 4;
+    position: sticky;
+    top: calc(var(--titleblock-h) + 48px);
+  }
+  .levels {
+    grid-column: 6 / -1;
+  }
+  .level {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+  .levelTitle {
+    grid-column: 2 / span 3;
+  }
+  .levelText {
+    grid-column: 2 / -1;
+  }
+}
+
+/* ── Method ────────────────────────────────────────────────────────────── */
+
+.method {
+  row-gap: 40px;
+  padding-top: clamp(120px, 14vw, 240px);
+}
+
+.methodHead,
+.peopleHead,
+.colophonHead {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 12px;
+}
+
+.serifTitle {
+  font-family: var(--font-serif);
+  font-size: var(--fs-title);
+  font-weight: 340;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.steps {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 0;
+}
+
+.step {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 20px 0 32px;
+}
+
+.stepAxis {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: var(--color-carbon);
+}
+
+.stepName {
+  font-family: var(--font-display);
+  font-weight: 640;
+  font-variation-settings: "wdth" 62;
+  font-size: clamp(2.75rem, 1.5rem + 4vw, 5.5rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.stepText {
+  max-width: 28ch;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+  .steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--gutter);
+  }
+}
+
+@media (min-width: 1024px) {
+  .steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  /* In a row, the steps hang from vertical axes rather than sit on rules. */
+  .step {
+    padding: 0 0 0 16px;
+    min-height: 280px;
+  }
+  .stepAxis {
+    inset: 0 auto 0 0;
+    width: 1px;
+    height: auto;
+    --origin: center top;
+    --draw-from: 1 0;
+  }
+}
+
+/* ── People ────────────────────────────────────────────────────────────── */
+
+.people {
+  row-gap: 40px;
+  padding-top: clamp(120px, 14vw, 240px);
+}
+
+.peopleFrame {
+  grid-column: 1 / span 2;
+  aspect-ratio: 9 / 16;
+}
+
+.founders {
+  grid-column: 3 / -1;
+  display: grid;
+  gap: 32px;
+  align-content: start;
+}
+
+.founder {
+  display: grid;
+  gap: 8px;
+}
+
+.founderName {
+  font-size: clamp(2.25rem, 1rem + 4vw, 5rem);
+}
+
+.founderNote {
+  max-width: 34ch;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
+
+.studios {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gutter);
+  padding-top: 20px;
+  border-top: 1px solid var(--color-carbon);
+}
+
+.studioCity {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 125;
+  font-weight: 560;
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.studioRole {
+  margin-top: 8px;
+  font-size: var(--fs-small);
+  line-height: 1.45;
+  max-width: 26ch;
+}
+
+@media (min-width: 768px) {
+  .peopleFrame {
+    grid-column: 1 / span 3;
+  }
+  .founders {
+    grid-column: 4 / -1;
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--gutter);
+  }
+}
+
+@media (min-width: 1024px) {
+  .peopleHead {
+    grid-column: 1 / span 4;
+  }
+  .peopleFrame {
+    grid-column: 1 / span 3;
+    grid-row: 2 / span 2;
+  }
+  .founders {
+    grid-column: 5 / -1;
+    grid-row: 2;
+  }
+  .studios {
+    grid-column: 5 / -1;
+    grid-row: 3;
+    align-self: end;
+  }
+}
+
+/* ── Colophon ──────────────────────────────────────────────────────────── */
+
+.colophon {
+  row-gap: 32px;
+  padding-top: clamp(120px, 14vw, 240px);
+}
+
+.colophonBody {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 32px;
+}
+
+.conceptNote {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  max-width: 40em;
+  padding: 18px 20px;
+  border: 1px solid var(--color-carbon);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+}
+
+.conceptMark {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  background: var(--color-vermilion);
+  translate: 0 -1px;
+}
+
+.colophonList > div {
+  display: grid;
+  gap: 6px;
+  padding-block: 14px;
+  border-top: 1px solid var(--hairline-strong);
+}
+
+.colophonList dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--color-slate);
+}
+
+.colophonList dd {
+  max-width: 60ch;
+  font-size: var(--fs-small);
+  line-height: 1.6;
+}
+
+@media (min-width: 1024px) {
+  .colophonHead {
+    grid-column: 1 / span 4;
+    align-self: start;
+  }
+  .colophonBody {
+    grid-column: 6 / -1;
+  }
+  .colophonList > div {
+    grid-template-columns: 12rem 1fr;
+    gap: var(--gutter);
+  }
+}

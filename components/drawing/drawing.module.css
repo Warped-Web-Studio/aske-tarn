@@ -1,0 +1,251 @@
+/* ── Datum (level line) ─────────────────────────────────────────────────── */
+
+.datum {
+  position: relative;
+  height: 1px;
+  color: var(--color-carbon);
+}
+
+.datumLine {
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+}
+
+.datumMarker {
+  position: absolute;
+  left: var(--margin);
+  bottom: 6px;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.datumSymbol {
+  width: 13px;
+  height: 12px;
+  margin-bottom: -6px;
+  flex: none;
+}
+
+.datumLevel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  line-height: 1;
+  font-feature-settings: "zero" 1;
+}
+
+.datumLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+}
+
+/* ── Dimension string ───────────────────────────────────────────────────── */
+
+.dimension {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 22px;
+  color: currentColor;
+}
+
+.dimensionLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: currentColor;
+}
+
+.dimensionTick {
+  position: absolute;
+  top: 50%;
+  width: 1px;
+  height: 14px;
+  background: currentColor;
+  translate: 0 -50%;
+  rotate: 45deg;
+}
+
+.tickStart {
+  left: 0;
+}
+.tickEnd {
+  right: 0;
+}
+
+.dimensionValue {
+  position: relative;
+  margin-inline: auto;
+  padding-inline: 8px;
+  background: var(--dimension-bg, var(--color-plaster));
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  line-height: 1;
+  font-feature-settings: "zero" 1;
+  white-space: nowrap;
+}
+
+/* ── Structural axes ────────────────────────────────────────────────────── */
+
+.axes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--gutter);
+  padding-inline: var(--margin);
+}
+
+.axis {
+  position: relative;
+}
+
+.axis::before,
+.axisEnd::before {
+  content: "";
+  position: absolute;
+  top: var(--axes-top, 0);
+  bottom: 0;
+  left: calc(var(--gutter) / -2);
+  width: 1px;
+  background: var(--axis);
+}
+
+/* The closing axis sits on the right edge of the last column. */
+.axisEnd {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: calc(var(--margin) - var(--gutter) / 2);
+  width: 0;
+}
+
+.axisEnd::before {
+  left: 0;
+}
+
+.axisBubble {
+  position: absolute;
+  top: var(--axes-bubble-top, 12px);
+  left: calc(var(--gutter) / -2);
+  translate: -50% 0;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 50%;
+  background: var(--color-plaster);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1;
+  color: var(--color-slate);
+}
+
+.axisEnd .axisBubble {
+  left: 0;
+}
+
+/* Axes beyond the current column count don't exist. */
+@media (max-width: 767px) {
+  .axis:nth-child(n + 5) {
+    display: none;
+  }
+}
+@media (max-width: 1023px) {
+  .axis:nth-child(n + 9) {
+    display: none;
+  }
+}
+
+.endLabel4,
+.endLabel8,
+.endLabel12 {
+  display: none;
+}
+@media (max-width: 767px) {
+  .endLabel4 {
+    display: inline;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .endLabel8 {
+    display: inline;
+  }
+}
+@media (min-width: 1024px) {
+  .endLabel12 {
+    display: inline;
+  }
+}
+
+/* ── Section marker ─────────────────────────────────────────────────────── */
+
+.marker {
+  display: inline-grid;
+  grid-template-rows: 1fr 1fr;
+  place-items: center;
+  width: var(--marker-size, 56px);
+  aspect-ratio: 1;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1;
+  font-feature-settings: "zero" 1;
+  position: relative;
+  flex: none;
+}
+
+.marker::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: currentColor;
+}
+
+.marker::after {
+  content: "";
+  position: absolute;
+  right: -11px;
+  top: 50%;
+  width: 0;
+  height: 0;
+  translate: 0 -50%;
+  border-block: 7px solid transparent;
+  border-left: 11px solid var(--color-vermilion);
+}
+
+.markerTop {
+  align-self: end;
+  padding-bottom: 5px;
+}
+
+.markerBottom {
+  align-self: start;
+  padding-top: 5px;
+}
+
+/* ── Cut image frame ───────────────────────────────────────────────────── */
+
+.frame {
+  position: relative;
+  overflow: clip;
+  background: var(--color-concrete);
+}
+
+.frame img {
+  object-fit: cover;
+}

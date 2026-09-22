@@ -1,0 +1,301 @@
+/* ── Desktop title block ─────────────────────────────────────────────────── */
+
+.titleblock {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .titleblock {
+    position: fixed;
+    z-index: 40;
+    top: 16px;
+    right: var(--margin);
+    display: flex;
+    height: var(--titleblock-h);
+    background: var(--color-plaster);
+    border: 1px solid var(--color-carbon);
+  }
+}
+
+.mark {
+  display: flex;
+  align-items: stretch;
+  border-right: 1px solid var(--color-carbon);
+}
+
+.monogram {
+  display: grid;
+  place-items: center;
+  width: var(--titleblock-h);
+  background: var(--color-carbon);
+  color: var(--color-plaster);
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 62;
+  font-weight: 700;
+  font-size: 1.125rem;
+  letter-spacing: 0.02em;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-inline: 14px 18px;
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 125;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+}
+
+.discipline {
+  font-family: var(--font-mono);
+  font-variation-settings: normal;
+  font-weight: 400;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: var(--color-slate);
+}
+
+.cells {
+  display: flex;
+  height: 100%;
+}
+
+.cells li + li {
+  border-left: 1px solid var(--hairline-strong);
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-width: 92px;
+  padding: 8px 12px 9px;
+  transition: background-color var(--t-micro) linear;
+}
+
+.cellNumber {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-slate);
+  font-feature-settings: "zero" 1;
+}
+
+.cellLabel {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 125;
+  font-weight: 560;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* The active sheet is marked like a revision: a vermilion corner. */
+.cell[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 7px;
+  height: 7px;
+  background: var(--color-vermilion);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+@media (hover: hover) {
+  .cell:hover,
+  .mark:hover .name {
+    background: var(--color-limewash);
+  }
+}
+
+/* ── Mobile / tablet sheet bar ───────────────────────────────────────────── */
+
+.bar {
+  position: fixed;
+  z-index: 40;
+  inset: auto 0 0 0;
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: stretch;
+  height: var(--sheetbar-h);
+  padding-bottom: env(safe-area-inset-bottom);
+  background: var(--color-plaster);
+  border-top: 1px solid var(--color-carbon);
+}
+
+@media (min-width: 1024px) {
+  .bar {
+    display: none;
+  }
+}
+
+.barMark {
+  display: grid;
+  place-items: center;
+  background: var(--color-carbon);
+  color: var(--color-plaster);
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 62;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.barSheet {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-inline: 14px;
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 125;
+  font-weight: 560;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-right: 1px solid var(--hairline-strong);
+}
+
+.barNumber {
+  font-family: var(--font-mono);
+  font-variation-settings: normal;
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: var(--color-slate);
+  letter-spacing: 0;
+}
+
+.barButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-inline: 18px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+/* ── Sheet index (popover) ───────────────────────────────────────────────── */
+
+.index {
+  position: fixed;
+  inset: auto 0 0 0;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  max-height: 100svh;
+  margin: 0;
+  padding: 0 0 env(safe-area-inset-bottom);
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 0;
+  border-top: 1px solid var(--color-carbon);
+  background: var(--color-plaster);
+  color: var(--color-carbon);
+}
+
+.index::backdrop {
+  background: color-mix(in oklab, var(--color-carbon) 55%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .index,
+  .index::backdrop {
+    transition:
+      translate 520ms var(--ease-draft),
+      opacity 320ms linear,
+      display 520ms allow-discrete,
+      overlay 520ms allow-discrete;
+  }
+  .index:not(:popover-open) {
+    translate: 0 100%;
+  }
+  .index:not(:popover-open)::backdrop {
+    opacity: 0;
+  }
+  @starting-style {
+    .index:popover-open {
+      translate: 0 100%;
+    }
+    .index:popover-open::backdrop {
+      opacity: 0;
+    }
+  }
+}
+
+:global(body:has(#sheet-index:popover-open)) {
+  overflow: hidden;
+}
+
+.indexHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 56px;
+  padding-inline: var(--margin);
+  border-bottom: 1px solid var(--hairline-strong);
+}
+
+.close {
+  height: 100%;
+  padding-inline: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.indexList li + li {
+  border-top: 1px solid var(--hairline);
+}
+
+.indexLink {
+  display: grid;
+  grid-template-columns: 3.25rem 1fr;
+  align-items: baseline;
+  padding: 14px var(--margin) 10px;
+}
+
+.indexNumber {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--color-slate);
+  font-feature-settings: "zero" 1;
+}
+
+.indexLabel {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 62;
+  font-weight: 640;
+  font-size: clamp(3.25rem, 17vw, 7rem);
+  line-height: 0.86;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.indexLink[aria-current="page"] .indexNumber {
+  color: var(--color-vermilion);
+}
+
+.indexFoot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding: 20px var(--margin) 24px;
+  border-top: 1px solid var(--hairline-strong);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+}
+
+.concept {
+  color: var(--color-slate);
+}

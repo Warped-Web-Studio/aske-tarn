@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:unsplash.com)",
+      "Bash(python3 -)",
+      "Bash(grep -v '^$')",
+      "Bash(curl -s \"https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62,700\")",
+      "Bash(curl -s \"https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@700\")",
+      "Bash(python3 -m venv ft)",
+      "Bash(./ft/bin/pip install *)",
+      "Bash(./ft/bin/fonttools varLib.instancer archivo-var.ttf wdth=62 wght=700 -o /Users/timmylong/architecture/assets/fonts/archivo-condensed-700.ttf)",
+      "Bash(curl -sL -o archivo-vf.ttf \"https://github.com/google/fonts/raw/main/ofl/archivo/Archivo%5Bwdth%2Cwght%5D.ttf\")",
+      "Bash(./ft/bin/fonttools varLib.instancer archivo-vf.ttf wdth=62 wght=700 -o /Users/timmylong/architecture/assets/fonts/archivo-condensed-700.ttf)",
+      "Bash(node -e 'require\\(\"sharp\"\\);console.log\\(\"sharp ok\"\\)')",
+      "Bash(node probe.mjs http://localhost:3100/ 1440 900 '\\(async \\(\\) => { for \\(let y = 0; y < document.body.scrollHeight; y += 500\\) { scrollTo\\(0, y\\); await new Promise\\(r => setTimeout\\(r, 300\\)\\); } await new Promise\\(r => setTimeout\\(r, 8000\\)\\); return [...document.images].map\\(i => \\({ src: i.currentSrc.slice\\(0, 90\\), complete: i.complete, w: i.naturalWidth, loading: i.loading }\\)\\); }\\)\\(\\)')",
+      "Bash(node probe.mjs http://localhost:3100/ 1440 900 '\\(async \\(\\) => { for \\(let y = 0; y < document.body.scrollHeight; y += 500\\) { scrollTo\\(0, y\\); await new Promise\\(r => setTimeout\\(r, 300\\)\\); } await new Promise\\(r => setTimeout\\(r, 6000\\)\\); const imgs=[...document.images]; return { total: imgs.length, loaded: imgs.filter\\(i => i.complete && i.naturalWidth > 0\\).length, revealed: document.querySelectorAll\\(\"[data-reveal][data-revealed]\"\\).length, reveal: document.querySelectorAll\\(\"[data-reveal]\"\\).length }; }\\)\\(\\)')",
+      "Bash(sed -i '' '/document.querySelectorAll\\(\"\\\\[data-reveal\\\\]\"\\).forEach\\(\\(el\\) => el.setAttribute\\(\"data-revealed\", \"\"\\)\\);/d' /private/tmp/claude-501/-Users-timmylong-architecture/3c3e2e67-57ed-48a0-a1fa-6125511aeaf5/scratchpad/shot.mjs)",
+      "Bash(npm pkg *)",
+      "Bash(npm test *)",
+      "Bash(npx tsc *)",
+      "Bash(npx eslint *)",
+      "Bash(pkill -f \"next dev -p 3100\")",
+      "Bash(npm run *)",
+      "Bash(npx playwright *)",
+      "Bash(curl -s http://localhost:3200/)",
+      "Bash(curl -s http://localhost:3200/projects/the-salt-archive)",
+      "Bash(pkill -f \"next start -p 3200\")",
+      "Bash(rm -f hero-*.png)",
+      "Bash(node shot.mjs http://localhost:3200/ /private/tmp/claude-501/-Users-timmylong-architecture/3c3e2e67-57ed-48a0-a1fa-6125511aeaf5/scratchpad/hero 320x568,375x667,768x1024,1024x768,1920x1080)",
+      "Bash(python3 /private/tmp/claude-501/-Users-timmylong-architecture/3c3e2e67-57ed-48a0-a1fa-6125511aeaf5/scratchpad/unused.py)"
+    ]
+  }
+}

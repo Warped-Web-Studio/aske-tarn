@@ -1,0 +1,44 @@
+{
+  "$comment": "Temporary imagery (Unsplash License). Replace a photograph by dropping a new file with the same name into content/images/ — or edit this list and run `npm run images`. Credits on /studio are generated from this file.",
+  "images": [
+    { "file": "salt-archive/exterior.jpg", "id": "photo-1761543591927-0efde0ad3e8f", "page": "AbP8rDZKdTM", "by": "Nomad Studio" },
+    { "file": "salt-archive/ramp.jpg", "id": "photo-1565768502473-c5dc73b7eb33", "page": "ulFAi1jkNcA", "by": "Jonny James" },
+    { "file": "salt-archive/rooflight.jpg", "id": "photo-1451438143976-4e1aa4f7f153", "page": "k87dHceae1w", "by": "Stefan Spassov" },
+    { "file": "salt-archive/fins.jpg", "id": "photo-1563891925196-a3e34f6d869c", "page": "oMCC7gKDBYE", "by": "Anton Lammert" },
+    { "file": "salt-archive/wall.jpg", "id": "photo-1520529890308-f503006340b4", "page": "R-wQExeiGrc", "by": "Rubén García" },
+    { "file": "salt-archive/stair.jpg", "id": "photo-1776589583350-16fae6a4cacb", "page": "JmtEV6N3YQ4", "by": "Jimmy Liu" },
+    { "file": "salt-archive/concrete.jpg", "id": "photo-1635074155443-6cbf74711dd2", "page": "DrQ_An-GwOw", "by": "Bjørn-Magnus Kristiansen" },
+    { "file": "salt-archive/soffit.jpg", "id": "photo-1630146694733-9d730e4ed310", "page": "be2lj7tGAI0", "by": "Clarisse Croset" },
+
+    { "file": "hollin-house/sea.jpg", "id": "photo-1784820605329-a088b134ba4d", "page": "lJ7tkvY-Kqo", "by": "David Klein" },
+    { "file": "hollin-house/frame.jpg", "id": "photo-1786191385547-2daee1334a93", "page": "Ns5kCZw0uZ8", "by": "David Muska" },
+    { "file": "hollin-house/court.jpg", "id": "photo-1717477660140-8709f24e2894", "page": "CnzWTMAfOXE", "by": "Tarun Hirapara" },
+    { "file": "hollin-house/cliff.jpg", "id": "photo-1781381014265-eb0eb6450ca6", "page": "TOxQD4LAyFw", "by": "Jonathan Adams" },
+
+    { "file": "bregaglia/refuge.jpg", "id": "photo-1696702943218-0b7d66f1af17", "page": "UHbnEnwGV3U", "by": "Victor G" },
+    { "file": "bregaglia/valley.jpg", "id": "photo-1754258516646-98d674db22d5", "page": "qC34mAV0XGQ", "by": "Onur Kaya" },
+    { "file": "bregaglia/passage.jpg", "id": "photo-1620902740358-c07fe4916812", "page": "NsUpK4DgG-0", "by": "Ricardo Gomez Angel" },
+    { "file": "bregaglia/walls.jpg", "id": "photo-1764572984487-9b330bd2f399", "page": "fjhMUKUiZFw", "by": "Leo Gilgamesh" },
+
+    { "file": "casa-umbra/dunes.jpg", "id": "photo-1780303009851-2a4fa8139cb9", "page": "Wx0B0D0Fk40", "by": "Zhao Yangyang" },
+    { "file": "casa-umbra/interior.jpg", "id": "photo-1752577137302-3cd585efbd2b", "page": "rRQIhNpP2CY", "by": "Shubham Dhage" },
+    { "file": "casa-umbra/earth.jpg", "id": "photo-1649186021707-5e65ff8f8b99", "page": "QdiHBmETSRI", "by": "Mr. Great Heart" },
+    { "file": "casa-umbra/dusk.jpg", "id": "photo-1653502626104-2b6effaa58ca", "page": "kVPyYw880OE", "by": "Francesco Liotti" },
+
+    { "file": "lanterna/stone.jpg", "id": "photo-1667388487644-b8c64c213f84", "page": "QvufxQIFmwc", "by": "Tadeja Pavšič" },
+    { "file": "lanterna/stair.jpg", "id": "photo-1741524915998-5773c6273771", "page": "bIMZSjz3KKI", "by": "Declan Sun" },
+    { "file": "lanterna/arcade.jpg", "id": "photo-1741524915518-3ee884ae7928", "page": "JwoCmgSpICc", "by": "Declan Sun" },
+    { "file": "lanterna/terrace.jpg", "id": "photo-1787228459410-916199ca796e", "page": "P7yilKz2rbw", "by": "Mattia Revelant" },
+
+    { "file": "nave/hall.jpg", "id": "photo-1774021795769-375b0a521d90", "page": "DI2B_3STArA", "by": "Julia Taubitz" },
+    { "file": "nave/room.jpg", "id": "photo-1774021793928-c1f3698ff984", "page": "xGvud51K1X0", "by": "Julia Taubitz" },
+    { "file": "nave/oculus.jpg", "id": "photo-1779437719199-f1646877294f", "page": "bnFXPTDvt-M", "by": "yanhui xue" },
+
+    { "file": "threshold/lattice.jpg", "id": "photo-1558957543-8420c734eae0", "page": "7dhBNr3rkng", "by": "Bernd Dittrich" },
+    { "file": "threshold/legs.jpg", "id": "photo-1569258592171-357ea26da4df", "page": "IWYcrdO93WY", "by": "준영 박" },
+    { "file": "threshold/sawtooth.jpg", "id": "photo-1554201791-f9fcfba504a0", "page": "2IDFHqBvUm4", "by": "Serhii Tyaglovsky" },
+
+    { "file": "studio/slot.jpg", "id": "photo-1769658860769-276993f75149", "page": "Vsr1wo2tOYY", "by": "HYEWON HWANG" },
+    { "file": "studio/court.jpg", "id": "photo-1625390711106-3728815ebcd9", "page": "9AjwOAIdsII", "by": "Ricardo Gomez Angel" }
+  ]
+}

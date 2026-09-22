@@ -1,26 +1,412 @@
 @import "tailwindcss";
 
+/* ──────────────────────────────────────────────────────────────────────────
+   ASKE TARN — design system
+   The site is read as a section drawing: a structural grid (axes A–M), a
+   ground line (±0.00), poché below it, and annotations in mono.
+   ────────────────────────────────────────────────────────────────────────── */
+
+@theme {
+  /* Only the house palette exists; Tailwind's defaults are removed. */
+  --color-*: initial;
+  --color-plaster: #ece8e0;
+  --color-limewash: #f5f2ec;
+  --color-concrete: #d6d0c5;
+  --color-stone: #a39e93;
+  --color-slate: #5e5a53;
+  --color-graphite: #2a2926;
+  --color-carbon: #161614;
+  --color-vermilion: #c23b22;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --font-*: initial;
+  --font-display: var(--font-archivo), "Arial Narrow", Arial, sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --ease-draft: cubic-bezier(0.65, 0, 0.15, 1);
+  --ease-settle: cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Grid — 4 / 8 / 12 columns on an 8 px module. */
+  --cols: 4;
+  --margin: 16px;
+  --gutter: 12px;
+
+  /* Type scale */
+  --fs-label: 0.75rem;
+  --fs-small: 0.875rem;
+  --fs-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --fs-lede: clamp(1.5rem, 1.15rem + 1.5vw, 2.6rem);
+  --fs-title: clamp(2.25rem, 1.4rem + 3.6vw, 4.75rem);
+  --fs-display: clamp(3.75rem, 1rem + 12vw, 14rem);
+
+  /* Motion — four verbs share these. */
+  --t-micro: 180ms;
+  --t-set: 760ms;
+  --t-cut: 1150ms;
+  --stagger: 70ms;
+
+  /* Chrome */
+  --titleblock-h: 0px;
+  --sheetbar-h: calc(56px + env(safe-area-inset-bottom));
+
+  --hairline: color-mix(in oklab, var(--color-carbon) 22%, transparent);
+  --hairline-strong: color-mix(in oklab, var(--color-carbon) 55%, transparent);
+  --axis: color-mix(in oklab, var(--color-carbon) 9%, transparent);
+
+  color-scheme: light;
+  scrollbar-color: var(--color-stone) var(--color-plaster);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@media (min-width: 768px) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --cols: 8;
+    --margin: 32px;
+    --gutter: 16px;
+    --fs-label: 0.75rem;
   }
 }
 
+@media (min-width: 1024px) {
+  :root {
+    --cols: 12;
+    --margin: clamp(40px, 3.6vw, 72px);
+    --gutter: clamp(16px, 1.4vw, 28px);
+    --titleblock-h: 52px;
+    --sheetbar-h: 0px;
+  }
+}
+
+/* ── Base ───────────────────────────────────────────────────────────────── */
+
+html {
+  background: var(--color-plaster);
+  color: var(--color-carbon);
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100svh;
+  font-family: var(--font-serif);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  font-optical-sizing: auto;
+  overflow-x: clip;
+  padding-bottom: var(--sheetbar-h);
+}
+
+::selection {
+  background: var(--color-carbon);
+  color: var(--color-plaster);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-vermilion);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  user-select: none;
+}
+
+[id] {
+  scroll-margin-top: calc(var(--titleblock-h) + 24px);
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  padding: 10px 14px;
+  background: var(--color-carbon);
+  color: var(--color-plaster);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  translate: 0 -200%;
+}
+.skip-link:focus-visible {
+  translate: 0 0;
+}
+
+/* ── Grid ───────────────────────────────────────────────────────────────── */
+
+@utility sheet {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--gutter);
+  padding-inline: var(--margin);
+}
+
+/* ── Type ───────────────────────────────────────────────────────────────── */
+
+@utility label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-feature-settings: "zero" 1;
+}
+
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 640;
+  font-variation-settings: "wdth" 62;
+  text-transform: uppercase;
+  line-height: 0.84;
+  letter-spacing: -0.012em;
+}
+
+@utility lede {
+  font-family: var(--font-serif);
+  font-size: var(--fs-lede);
+  font-weight: 340;
+  line-height: 1.18;
+  letter-spacing: -0.012em;
+  text-wrap: pretty;
+}
+
+@utility prose {
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  text-wrap: pretty;
+  hanging-punctuation: first;
+
+  & > p + p {
+    margin-top: 1em;
+  }
+}
+
+/* ── Drawing primitives ─────────────────────────────────────────────────── */
+
+@utility poche {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-stone) 0 1px,
+    transparent 1px 7px
+  );
+}
+
+/* ── Interaction ────────────────────────────────────────────────────────── */
+
+@utility link-line {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+  transition: background-size var(--t-set) var(--ease-draft);
+
+  @media (hover: hover) {
+    &:hover {
+      background-size: 0 1px;
+      background-position: 100% 100%;
+    }
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   MOTION — four verbs
+   draw      lines extend from their origin along their axis
+   cut       images open upward from the ground line (a retracting cover)
+   set       type rises out of a mask, line by line
+   annotate  labels arrive after the thing they describe
+   All hidden states exist only when JS is running and motion is welcome,
+   so content is always present without them.
+   ────────────────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    --delay: calc(var(--i, 0) * var(--stagger));
+  }
+
+  /* draw */
+  .js [data-reveal] [data-draw],
+  .js [data-reveal="draw"] {
+    transform-origin: var(--origin, left center);
+    scale: var(--draw-from, 0 1);
+    transition: scale var(--t-cut) var(--ease-draft) var(--delay);
+  }
+  .js [data-revealed] [data-draw],
+  .js [data-reveal="draw"][data-revealed] {
+    scale: 1 1;
+  }
+
+  /* cut — a plaster sheet retracts upward, so the photograph opens from its
+     base. An overlay rather than clip-path: a clipped image never counts as
+     visible, which would stop both lazy loading and the reveal itself. */
+  .js [data-reveal="cut"]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: var(--cut-cover, var(--color-plaster));
+    transform-origin: center top;
+    pointer-events: none;
+    transition: scale var(--t-cut) var(--ease-draft) var(--delay);
+  }
+  .js [data-reveal="cut"] img {
+    scale: 1.08;
+    transition: scale calc(var(--t-cut) * 1.6) var(--ease-settle) var(--delay);
+  }
+  .js [data-reveal="cut"][data-revealed]::after {
+    scale: 1 0;
+  }
+  .js [data-reveal="cut"][data-revealed] img {
+    scale: 1;
+  }
+
+  /* set */
+  .js [data-reveal] [data-line] > * {
+    translate: 0 108%;
+    transition: translate var(--t-set) var(--ease-draft)
+      calc(var(--delay) + var(--line, 0) * var(--stagger));
+  }
+  .js [data-revealed] [data-line] > * {
+    translate: 0 0;
+  }
+
+  /* annotate */
+  .js [data-reveal] [data-annotate] {
+    opacity: 0;
+    translate: 0 6px;
+    transition:
+      opacity var(--t-set) var(--ease-settle),
+      translate var(--t-set) var(--ease-settle);
+    transition-delay: calc(var(--delay) + var(--t-set) * 0.6 + var(--a, 0) * var(--stagger));
+  }
+  .js [data-revealed] [data-annotate] {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+[data-line] {
+  display: block;
+  overflow: clip;
+  /* Room for descenders and accents inside the mask. */
+  padding-block: 0.06em;
+  margin-block: -0.06em;
+}
+[data-line] > * {
+  display: block;
+}
+
+/* ── Hover: a slow settle on project imagery ────────────────────────────── */
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .frame-hover img {
+    transition: scale 1400ms var(--ease-settle);
+  }
+  .frame-hover:hover img,
+  .frame-hover:focus-visible img {
+    scale: 1.035;
+  }
+}
+
+/* ── Scroll-driven parallax (progressive) ───────────────────────────────── */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .parallax img {
+      animation: parallax linear both;
+      animation-timeline: view();
+    }
+  }
+}
+
+/* Uses transform so it composes with the cut's `scale` settle. */
+@keyframes parallax {
+  from {
+    transform: translateY(-4%) scale(1.1);
+  }
+  to {
+    transform: translateY(4%) scale(1.1);
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   VIEW TRANSITIONS
+   sheet     a new drawing sheet is laid over the old one (cut, top-down)
+   morph     a project photograph carries across routes
+   ────────────────────────────────────────────────────────────────────────── */
+
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-old(.sheet) {
+  animation: 260ms var(--ease-settle) both sheet-out;
+}
+::view-transition-new(.sheet) {
+  animation: 820ms var(--ease-draft) both sheet-in;
+}
+
+@keyframes sheet-out {
+  to {
+    opacity: 0;
+    translate: 0 -24px;
+  }
+}
+@keyframes sheet-in {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+::view-transition-group(.morph) {
+  animation-duration: 900ms;
+  animation-timing-function: var(--ease-draft);
+  z-index: 50;
+}
+::view-transition-image-pair(.morph) {
+  isolation: auto;
+}
+::view-transition-old(.morph),
+::view-transition-new(.morph) {
+  animation: none;
+  mix-blend-mode: normal;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  overflow: clip;
+}
+::view-transition-old(.morph) {
+  display: none;
+}
+
+::view-transition-group(chrome),
+::view-transition-group(chrome-bar) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(chrome),
+::view-transition-old(chrome-bar) {
+  display: none;
+}
+::view-transition-new(chrome),
+::view-transition-new(chrome-bar) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
 }

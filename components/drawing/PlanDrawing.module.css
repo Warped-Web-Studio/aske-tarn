@@ -1,0 +1,172 @@
+.plan {
+  display: grid;
+  gap: 40px;
+}
+
+@media (min-width: 1024px) {
+  .plan {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    align-items: end;
+  }
+  .sheet {
+    grid-column: 1 / span 8;
+  }
+  .schedule {
+    grid-column: 10 / -1;
+  }
+}
+
+.sheet {
+  position: relative;
+  padding-bottom: 48px;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.portrait {
+  display: none;
+  max-height: 72svh;
+  margin-inline: auto;
+}
+
+@media (max-width: 599px) {
+  .landscape {
+    display: none;
+  }
+  .portrait {
+    display: block;
+  }
+  .north svg {
+    rotate: 90deg;
+  }
+}
+
+.room {
+  --on: 0;
+  fill: color-mix(in oklab, var(--color-vermilion) calc(var(--on) * 16%), transparent);
+  stroke: color-mix(in oklab, var(--color-vermilion) calc(var(--on) * 100%), transparent);
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
+  transition:
+    fill var(--t-micro) linear,
+    stroke var(--t-micro) linear;
+}
+
+.cut {
+  fill: var(--color-carbon);
+}
+
+.below {
+  fill: none;
+  stroke: var(--color-carbon);
+  stroke-width: 0.75;
+  vector-effect: non-scaling-stroke;
+}
+
+.overhead {
+  fill: none;
+  stroke: var(--color-slate);
+  stroke-width: 0.5;
+  stroke-dasharray: 2 4;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.35;
+}
+
+.glazing {
+  stroke: var(--color-carbon);
+  stroke-width: 0.75;
+  vector-effect: non-scaling-stroke;
+}
+
+.north {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+}
+
+.scale {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  /* 10 m at the drawing's scale: 10 / 76 of its width. */
+  width: calc(100% * 10 / 76);
+  min-width: 64px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+}
+
+@media (max-width: 599px) {
+  .scale {
+    width: 64px;
+  }
+}
+
+.scaleBar {
+  display: block;
+  height: 6px;
+  border: 1px solid var(--color-carbon);
+  background: linear-gradient(90deg, var(--color-carbon) 50%, transparent 50%);
+}
+
+.scaleLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+.schedule {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-small);
+}
+
+.schedule thead th {
+  padding-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  font-weight: 400;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--color-slate);
+  border-bottom: 1px solid var(--color-carbon);
+}
+
+.schedule thead th:last-child,
+.schedule td:last-child {
+  text-align: right;
+}
+
+.schedule tbody tr {
+  --on: 0;
+  border-bottom: 1px solid var(--hairline);
+  cursor: default;
+  outline-offset: -2px;
+  background: color-mix(in oklab, var(--color-vermilion) calc(var(--on) * 8%), transparent);
+  transition: background-color var(--t-micro) linear;
+}
+
+.schedule tbody th {
+  padding: 12px 8px;
+  font-weight: 400;
+  text-align: left;
+}
+
+.schedule td {
+  padding: 12px 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  font-feature-settings: "zero" 1;
+  white-space: nowrap;
+}
